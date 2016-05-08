@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Ondřej Šejvl">
+
+        <title>ERROR</title>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <style>
+            .actions {
+                width: 210px;
+            }
+            span.required {
+                color: red;
+            }
+            h1, h2 {
+                text-align: center;
+            }
+            .traceback {
+                background: #000;
+                color: #4CC417;
+                padding: 5px;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="col-md-offset-4 col-md-4 col-sm-offset-2 col-sm-8">    
+            <br>
+            <div class="jumbotron alert alert-danger">
+                <h1>ERROR <span class="label label-danger">{{ status_code }}</span></h1>
+                <h2><span class="label label-default">{{ message | nl2br | safe }}</span></h2>
+                <br>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger progress-bar-striped active" style="width: 95%">
+                        <span class="sr-only">...</span>
+                    </div>
+                </div>
+                <p>
+                    Málem se to povedlo, ale bohužel na adrese
+                    <br><code>{{ uri }}</code><br>
+                    nastala nemilá chyba. Opiště si prosím následující kod chyby 
+                    a zkuste vyhledat odbornou pomoc.
+                </p>
+                <br>
+                <div class="well">
+                    {{ code | wordwrap(60)}}
+                </div>
+                {% if traceback %}
+                    <div class="traceback">
+                        {{ traceback  | nl2br | safe }}
+                    </div> 
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>
